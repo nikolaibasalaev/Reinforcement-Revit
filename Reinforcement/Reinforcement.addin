@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <!--
+  <AddIn Type="Command">
+    <Text>Command Reinforcement</Text>
+    <Description>Some description for Reinforcement</Description>
+    <Assembly>Reinforcement.dll</Assembly>
+    <FullClassName>Reinforcement.DublicateViews</FullClassName>
+    <ClientId>
+      83A0BB25-6DAA-4ABC-8DAD-C9E293FA0B4A
+    </ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+ 
+  <AddIn Type="Command">
+    <Text>Command Reinforcement</Text>
+    <Description>Some description for Reinforcement</Description>
+    <Assembly>Reinforcement.dll</Assembly>
+    <FullClassName>Reinforcement.CreateSheet</FullClassName>
+    <ClientId>
+      95F23B66-5449-45CD-B47F-2B73B4768F57
+    </ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+  
+  <AddIn Type="Command">
+    <Text>Command Reinforcement</Text>
+    <Description>Some description for Reinforcement</Description>
+    <Assembly>Reinforcement.dll</Assembly>
+    <FullClassName>Reinforcement.WinFormTest</FullClassName>
+    <ClientId>
+      EE860B66-CC5C-470B-AF62-006D4B707BA6
+    </ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+
+  <AddIn Type="Command">
+    <Text>Command Reinforcement</Text>
+    <Description>Some description for Reinforcement</Description>
+    <Assembly>Reinforcement.dll</Assembly>
+    <FullClassName>Reinforcement.SheetCreate</FullClassName>
+    <ClientId>
+      AAFADEF0-314D-4C0C-BE59-0595F3114052
+    </ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+  -->
+  <AddIn Type="Application">
+    <Name>ApplicationPluginNew</Name>
+    <Assembly>Reinforcement.dll</Assembly>
+    <AddInId>
+      55967DEE-60B0-45B9-9E18-082225059447
+    </AddInId>
+    <FullClassName>Reinforcement.App</FullClassName>
+    <VendorId>Jeremy</VendorId>
+    <VendorDescription>@Learndynamo2</VendorDescription>
+  </AddIn>
+  <!--
+
+  -->
+</RevitAddIns>
