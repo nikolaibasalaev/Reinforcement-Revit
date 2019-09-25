@@ -79,31 +79,18 @@ namespace Reinforcement
     }
     public class ViewsMgr
     {
-       // private TreeNode m_allViewsNames = new TreeNode("Views (all)");
-       // private ViewSet m_allViews = new ViewSet();
-       // private ViewSet m_selectedViews = new ViewSet();
+       
         private FamilySymbol m_titleBlock;
         private IList<Element> m_allTitleBlocks = new List<Element>();
         private ArrayList m_allTitleBlocksNames = new ArrayList();
         private string m_sheetName;
 
-        
          private double m_rows;
 
          private double TITLEBAR = 0.2;
          private double GOLDENSECTION = 0.618;
 
-        /// <summary>
-        /// Tree node store all views' names.
-        /// </summary>
-        /*  public TreeNode AllViewsNames
-          {
-              get
-              {
-                  return m_allViewsNames;
-              }
-          }
-          */
+      
         /// <summary>
         /// List of all title blocks' names.
         /// </summary>
