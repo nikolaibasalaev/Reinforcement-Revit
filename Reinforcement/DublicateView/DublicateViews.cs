@@ -1,6 +1,13 @@
 #region Namespaces
 using System;
 using System.Collections.Generic;
+using System.Text;
+
+using System.Windows.Forms;
+using System.Collections;
+using System.Xml;
+
+using Autodesk.Revit;
 using System.Diagnostics;
 using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
@@ -12,15 +19,96 @@ using System.Linq;
 
 namespace Reinforcement
 {
-    [Transaction(TransactionMode.Manual)]
+    [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
+    [Autodesk.Revit.Attributes.Regeneration(Autodesk.Revit.Attributes.RegenerationOption.Manual)]
+    [Autodesk.Revit.Attributes.Journaling(Autodesk.Revit.Attributes.JournalingMode.NoCommandData)]
     public class DublicateViews : IExternalCommand
     {
-        public Result Execute(
-          ExternalCommandData commandData,
-          ref string message,
-          ElementSet elements)
+        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            UIApplication uiapp = commandData.Application;
+            Transaction newTran = null;
+            try
+            {
+                if (null == commandData)
+                {
+                    throw new ArgumentNullException("commandData");
+                }
+
+                Document doc = commandData.Application.ActiveUIDocument.Document;
+                ViewDubl view = new ViewDubl(doc);
+                Autodesk.Revit.DB.View viewcur = doc.ActiveView;
+
+                newTran = new Transaction(doc);
+                newTran.Start("SheetCreate");
+
+                Reinforcement.DublicateView.DublicateViewsForm dlg = new Reinforcement.DublicateView.DublicateViewsForm(view);
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    view.DublicateView(doc);
+                }
+                newTran.Commit();
+
+                return Autodesk.Revit.UI.Result.Succeeded;
+            }
+            catch (Exception e)
+            {
+                message = e.Message;
+                if ((newTran != null) && newTran.HasStarted() && !newTran.HasEnded())
+                    newTran.RollBack();
+                return Autodesk.Revit.UI.Result.Failed;
+            }
+        }
+
+
+#endregion IExternalCommand Members Implementation
+    }
+    public class ViewDubl
+    {
+        private string m_curViewName;
+
+    }
+    public string curViewName
+    {
+        get
+        {
+            return m_curViewName;
+        }
+        set
+        {
+            m_curViewName = value;
+        }
+    }
+
+    public ViewDubl(Document doc)
+    {
+        //GetAllViews(doc);
+       // GetTitleBlocks(doc);
+    }
+
+    public void DublicateView(Document doc)
+    {
+        Autodesk.Revit.DB.View viewcur = doc.ActiveView;
+        if (null == doc)
+        {
+            throw new ArgumentNullException("doc");
+        }
+
+        if (null == viewcur)
+        {
+            throw new InvalidOperationException("No view be selected, generate sheet be canceled.");
+        }
+        ViewSheet sheet = ViewSheet.Create(doc, m_titleBlock.Id);
+        sheet.Name = SheetName;
+        PlaceView(viewcur, sheet);
+    }
+
+
+
+
+    /*
+
+        UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Application app = uiapp.Application;
             Document doc = uidoc.Document;
@@ -84,5 +172,5 @@ namespace Reinforcement
 
             return Result.Succeeded;
         }
-    }
+    }*/
 }

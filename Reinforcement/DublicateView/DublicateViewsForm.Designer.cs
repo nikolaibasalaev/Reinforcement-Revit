@@ -2,6 +2,7 @@
 {
     partial class DublicateViewsForm
     {
+        private ViewDubl m_data;
         /// <summary>
         /// Required designer variable.
         /// </summary>

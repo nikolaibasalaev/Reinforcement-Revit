@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Text>Command DublicateView</Text>
+    <Description>Some description for DublicateView</Description>
+    <Assembly>DublicateView.dll</Assembly>
+    <FullClassName>DublicateView.Command</FullClassName>
+    <ClientId>5c5807ff-c2cf-4d50-87eb-63c125d0d159</ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+  <AddIn Type="Application">
+    <Name>Application DublicateView</Name>
+    <Assembly>DublicateView.dll</Assembly>
+    <FullClassName>DublicateView.App</FullClassName>
+    <ClientId>0de05897-5688-4bef-9ffc-3fb83b690c04</ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>
