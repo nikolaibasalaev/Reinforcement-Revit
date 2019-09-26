@@ -13,7 +13,7 @@ namespace Reinforcement.DublicateView
 {
     public partial class DublicateViewsForm : Form
     {
-        /*private DublicateViews m_instance;
+        private DublicateViews m_instance;
         private System.ComponentModel.Container m_components = null;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button okButton;
@@ -36,29 +36,35 @@ namespace Reinforcement.DublicateView
                 m_isReset = value;
             }
         }
-        */
-        public DublicateViewsForm()
+        
+        public DublicateViewsForm(DublicateViews Inst)
         {
-          //  m_isReset = false;
-          //  m_instance = Inst;
-          /*  if (null == m_instance)
+          m_isReset = false;
+          m_instance = Inst;
+          if (null == m_instance)
             {
                 TaskDialog.Show("Revit", "Load Application Failed");
-            }*/
+            }
             InitializeComponent();
         }
-       /* protected override void Dispose(bool disposing)
+
+        private void okButton_Click(object sender, System.EventArgs e)
         {
-            if (disposing)
+            if (IsReset)
             {
-                if (m_components != null)
-                {
-                    m_components.Dispose();
-                }
+                m_instance.CreateCopies();
+
             }
-            base.Dispose(disposing);
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+
         }
-        */
+        
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
