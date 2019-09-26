@@ -1,26 +1,63 @@
-﻿namespace Reinforcement.Commands
-{
-    partial class DublicateViewsForm
-    {
-        private ViewDubl m_data;
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+﻿using System;
+using System.Drawing;
+using System.Collections;
+using System.ComponentModel;
+using System.Windows.Forms;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+using Autodesk.Revit.UI;
+
+namespace Reinforcement.DublicateView
+{
+    public partial class DublicateViewsForm : Form
+    {
+        private DublicateViews m_instance;
+        private System.ComponentModel.Container m_components = null;
+        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Button okButton;
+        public System.Windows.Forms.RadioButton topRebarRadio;
+        public System.Windows.Forms.RadioButton bottomRebarRadio;
+        public System.Windows.Forms.RadioButton topAddRebarRadio;
+        public System.Windows.Forms.RadioButton bottomAddRebarRadio;
+        private System.Windows.Forms.Label viewLabel;
+        public System.Windows.Forms.TextBox viewTextBox;
+        private bool m_isReset;
+
+        public bool IsReset
+        {
+            get
+            {
+                return m_isReset;
+            }
+            set
+            {
+                m_isReset = value;
+            }
+        }
+
+        public DublicateViewsForm(DublicateViews Inst)
+        {
+            m_isReset = false;
+            m_instance = Inst;
+            if (null == m_instance)
+              {
+                  TaskDialog.Show("Revit", "Load Application Failed");
+              }
+            InitializeComponent();
+        }
+
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                if (m_components != null)
+                {
+                    m_components.Dispose();
+                }
             }
             base.Dispose(disposing);
         }
 
+        
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -150,14 +187,59 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton radioButtonTopRebar;
-        private System.Windows.Forms.RadioButton radioButtonBottomRebar;
-        private System.Windows.Forms.TextBox textBoxCurView;
-        private System.Windows.Forms.RadioButton radioButtonBottomAdd;
-        private System.Windows.Forms.RadioButton radioButtonTopAdd;
-        private System.Windows.Forms.Button Okbutton;
-        private System.Windows.Forms.Button cancelbutton;
-        private System.Windows.Forms.Label label2;
+        private void okButton_Click(object sender, System.EventArgs e)
+        {
+            if (IsReset)
+            {
+               // m_instance.RotateElement();
+
+            }
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+
+        }
+
+        private void cancelButton_Click(object sender, System.EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+
+        }
+
+        private void singleRadio_CheckedChanged(object sender, System.EventArgs e)
+        {
+            m_isReset = true;
+            m_instance.topRebarView = true;
+        }
+
+        private void singleRadio_CheckedChanged1(object sender, System.EventArgs e)
+        {
+            m_isReset = true;
+            m_instance.bottomRebarView = true;
+        }
+
+        private void singleRadio_CheckedChanged2(object sender, System.EventArgs e)
+        {
+            m_isReset = true;
+            m_instance.topAddRebarView = true;
+        }
+
+        private void singleRadio_CheckedChanged3(object sender, System.EventArgs e)
+        {
+            m_isReset = true;
+            m_instance.bottomAddRebarView = true;
+        }
+
+
+
+         private System.Windows.Forms.Label label1;
+         private System.Windows.Forms.RadioButton radioButtonTopRebar;
+         private System.Windows.Forms.RadioButton radioButtonBottomRebar;
+         private System.Windows.Forms.TextBox textBoxCurView;
+         private System.Windows.Forms.RadioButton radioButtonBottomAdd;
+         private System.Windows.Forms.RadioButton radioButtonTopAdd;
+         private System.Windows.Forms.Button Okbutton;
+         private System.Windows.Forms.Button cancelbutton;
+         private System.Windows.Forms.Label label2;
     }
 }
