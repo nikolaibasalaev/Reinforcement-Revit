@@ -115,6 +115,7 @@ namespace Reinforcement.DublicateView
             Document doc = project.Document;
 
             Autodesk.Revit.DB.View curview = doc.ActiveView;
+          // if (curview.ViewType=
             m_currentViewName = curview.Name;
 
             TaskDialog.Show("Sheet", "step1");
@@ -124,7 +125,7 @@ namespace Reinforcement.DublicateView
                 message = m_errorInformation;
                 return Autodesk.Revit.UI.Result.Failed;
             }
-            TaskDialog.Show("Sheet", "step2");
+            TaskDialog.Show("Sheet", curview.ViewType.ToString());
 
 
             // Show the dialog for the user select the wall style
@@ -135,8 +136,47 @@ namespace Reinforcement.DublicateView
                     return Autodesk.Revit.UI.Result.Failed;
                 }
             }
-            TaskDialog.Show("Sheet", "step3");
-            TaskDialog.Show("Sheet", m_currentViewName);
+           // TaskDialog.Show("Sheet", "step3");
+          //  TaskDialog.Show("Sheet", m_currentViewName);
+          //  TaskDialog.Show("Sheet", topRebarView.ToString());
+          //  TaskDialog.Show("Sheet", bottomRebarView.ToString());
+          //  TaskDialog.Show("Sheet", topAddRebarView.ToString());
+          //  TaskDialog.Show("Sheet", bottomAddRebarView.ToString());
+
+            if (topRebarView)
+            {
+                try
+                {
+                    CreateDublicate(doc, f_topRebarView, "topRebarView");
+                }
+                catch { }
+            }
+            if (bottomRebarView)
+            {
+                try
+                {
+                    CreateDublicate(doc, f_bottomRebarView, "bottomRebarView");
+                }
+                catch { }
+            }
+            if (topAddRebarView)
+            {
+                    try
+                    {
+                        CreateDublicate(doc, f_topAddRebarView, "topAddRebarView");
+                }
+                catch { }
+            }
+            if (bottomAddRebarView)
+            {
+                        try
+                        {
+                            CreateDublicate(doc, f_bottomAddRebarView, "bottomAddRebarView");
+                }
+                catch { }
+            }
+
+
 
             // If everything goes right, return succeeded.
             return Autodesk.Revit.UI.Result.Succeeded;
@@ -199,14 +239,17 @@ namespace Reinforcement.DublicateView
             return true;
         }
 
-        public void CreateDublicate(Document doc, string filtername)
+        public void CreateDublicate(Document doc, ParameterFilterElement filter, string nameprefix)
         {
             Autodesk.Revit.DB.View viewcur = doc.ActiveView;
 
             Transaction t = new Transaction(doc);
             t.Start("Create new dublicate");
-
-
+            ElementId newViewId = ElementId.InvalidElementId;
+            Autodesk.Revit.DB.View newView = null;
+            newViewId = viewcur.Duplicate(ViewDuplicateOption.Duplicate);
+            newView = viewcur.Document.GetElement(newViewId) as Autodesk.Revit.DB.View;
+            newView.Name = newView.Name + nameprefix;
 
             t.Commit();
 
