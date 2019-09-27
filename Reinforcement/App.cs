@@ -71,6 +71,16 @@ namespace Reinforcement
             pushButton.LargeImage = image5;
 
 
+            PushButtonData button6 = new PushButtonData("Button6", "testtss", path, "Reinforcement.TestsWF.ForTests");
+
+            //Add button image
+            Uri imagePath6 = new Uri(pictPath);
+            BitmapImage image6 = new BitmapImage(imagePath4);
+
+            PushButton pushButton6 = panel.AddItem(button6) as PushButton;
+            pushButton.LargeImage = image6;
+
+
             return Result.Succeeded;
         }
 

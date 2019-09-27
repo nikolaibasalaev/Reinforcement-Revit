@@ -54,21 +54,25 @@
             // 
             this.textBoxCurView.Location = new System.Drawing.Point(107, 30);
             this.textBoxCurView.Name = "textBoxCurView";
+            this.textBoxCurView.ReadOnly = true;
             this.textBoxCurView.Size = new System.Drawing.Size(401, 20);
             this.textBoxCurView.TabIndex = 4;
             this.textBoxCurView.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Okbutton
             // 
+            this.Okbutton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Okbutton.Location = new System.Drawing.Point(352, 188);
             this.Okbutton.Name = "Okbutton";
             this.Okbutton.Size = new System.Drawing.Size(75, 23);
             this.Okbutton.TabIndex = 7;
             this.Okbutton.Text = "OK";
             this.Okbutton.UseVisualStyleBackColor = true;
+            this.Okbutton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelbutton
             // 
+            this.cancelbutton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelbutton.Location = new System.Drawing.Point(433, 188);
             this.cancelbutton.Name = "cancelbutton";
             this.cancelbutton.Size = new System.Drawing.Size(75, 23);
@@ -147,13 +151,13 @@
             this.Text = "DublicateViewsForm";
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.Load += new System.EventHandler(this.DublicateViewsForm_Load);
 
         }
 
         #endregion
        
          private System.Windows.Forms.Label label1;
-         private System.Windows.Forms.TextBox textBoxCurView;
          private System.Windows.Forms.Button Okbutton;
          private System.Windows.Forms.Button cancelbutton;
          private System.Windows.Forms.Label label2;
@@ -161,5 +165,6 @@
         private System.Windows.Forms.CheckBox bottomMainRebarView;
         private System.Windows.Forms.CheckBox topAdditionalRebarView;
         private System.Windows.Forms.CheckBox bottomAdditionalRebarView;
+        private System.Windows.Forms.TextBox textBoxCurView;
     }
 }

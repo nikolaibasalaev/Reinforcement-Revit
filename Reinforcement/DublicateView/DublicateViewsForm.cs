@@ -13,33 +13,7 @@ namespace Reinforcement.DublicateView
 {
     public partial class DublicateViewsForm : Form
     {
-
         private DublicateViews m_dataBuffer;
-
-        //private DublicateViews m_instance;
-        /*
-        private System.ComponentModel.Container m_components = null;
-        private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button okButton;
-        public System.Windows.Forms.RadioButton topRebarRadio;
-        public System.Windows.Forms.RadioButton bottomRebarRadio;
-        public System.Windows.Forms.RadioButton topAddRebarRadio;
-        public System.Windows.Forms.RadioButton bottomAddRebarRadio;
-        private System.Windows.Forms.Label viewLabel;
-        public System.Windows.Forms.TextBox viewTextBox;
-        private bool m_isReset;
-        
-        public bool IsReset
-        {
-            get
-            {
-                return m_isReset;
-            }
-            set
-            {
-                m_isReset = value;
-            }
-        }*/
         
         public DublicateViewsForm(DublicateViews dataBuffer)
         {
@@ -48,34 +22,22 @@ namespace Reinforcement.DublicateView
             m_dataBuffer = dataBuffer;
             
         }
-
-
+        
         private void DublicateViewsForm_Load(object sender, EventArgs e)
         {
-           // wallTypeComboBox.DataSource = m_dataBuffer.WallTypes;
-           // wallTypeComboBox.DisplayMember = "Name";
-
-           // structualCheckBox.Checked = m_dataBuffer.IsSturctual;
+            //textBoxCurView.Text = "1244";
+           textBoxCurView.Text = m_dataBuffer.currentViewName;
+            
+            // structualCheckBox.Checked = m_dataBuffer.IsSturctual;
         }
-
-
+        
         private void okButton_Click(object sender, System.EventArgs e)
         {
-            try
-            {
-                if (this.topMainRebarview.Checked)
-                {
-                   // m_dataBuffer.CreateDublicate(); 
-                }
-                
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            catch(Exception ex)
-            {
-                TaskDialog.Show("Revit", ex.Message);
-            }
-       
+            m_dataBuffer.topRebarView = topMainRebarview.Checked;
+            m_dataBuffer.bottomRebarView = bottomMainRebarView.Checked;
+            m_dataBuffer.topAddRebarView = topAdditionalRebarView.Checked;
+            m_dataBuffer.bottomAddRebarView = bottomAdditionalRebarView.Checked;
+
         }
         
         private void cancelButton_Click(object sender, EventArgs e)

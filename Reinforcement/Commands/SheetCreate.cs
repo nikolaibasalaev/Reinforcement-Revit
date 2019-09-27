@@ -58,6 +58,7 @@ namespace Reinforcement
 
                 SheetCreateForm dlg = new SheetCreateForm(view);
 
+
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     view.GenerateSheet(doc);
