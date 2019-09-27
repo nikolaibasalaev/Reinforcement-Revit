@@ -59,6 +59,18 @@ namespace Reinforcement
 
             PushButton pushButton4 = panel.AddItem(button4) as PushButton;
             pushButton.LargeImage = image4;
+
+
+            PushButtonData button5 = new PushButtonData("Button5", "Dublicates", path, "Reinforcement.DublicateView.DublicateViews");
+
+            //Add button image
+            Uri imagePath5 = new Uri(pictPath);
+            BitmapImage image5 = new BitmapImage(imagePath4);
+
+            PushButton pushButton5 = panel.AddItem(button5) as PushButton;
+            pushButton.LargeImage = image5;
+
+
             return Result.Succeeded;
         }
 

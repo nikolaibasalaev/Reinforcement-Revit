@@ -31,14 +31,14 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.radioButtonTopRebar = new System.Windows.Forms.RadioButton();
-            this.radioButtonBottomRebar = new System.Windows.Forms.RadioButton();
             this.textBoxCurView = new System.Windows.Forms.TextBox();
-            this.radioButtonBottomAdd = new System.Windows.Forms.RadioButton();
-            this.radioButtonTopAdd = new System.Windows.Forms.RadioButton();
             this.Okbutton = new System.Windows.Forms.Button();
             this.cancelbutton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.topMainRebarview = new System.Windows.Forms.CheckBox();
+            this.bottomMainRebarView = new System.Windows.Forms.CheckBox();
+            this.topAdditionalRebarView = new System.Windows.Forms.CheckBox();
+            this.bottomAdditionalRebarView = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -50,28 +50,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Current View:";
             // 
-            // radioButtonTopRebar
-            // 
-            this.radioButtonTopRebar.AutoSize = true;
-            this.radioButtonTopRebar.Location = new System.Drawing.Point(34, 101);
-            this.radioButtonTopRebar.Name = "radioButtonTopRebar";
-            this.radioButtonTopRebar.Size = new System.Drawing.Size(101, 17);
-            this.radioButtonTopRebar.TabIndex = 2;
-            this.radioButtonTopRebar.TabStop = true;
-            this.radioButtonTopRebar.Text = "Top main rebars";
-            this.radioButtonTopRebar.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonBottomRebar
-            // 
-            this.radioButtonBottomRebar.AutoSize = true;
-            this.radioButtonBottomRebar.Location = new System.Drawing.Point(34, 124);
-            this.radioButtonBottomRebar.Name = "radioButtonBottomRebar";
-            this.radioButtonBottomRebar.Size = new System.Drawing.Size(115, 17);
-            this.radioButtonBottomRebar.TabIndex = 3;
-            this.radioButtonBottomRebar.TabStop = true;
-            this.radioButtonBottomRebar.Text = "Bottom main rebars";
-            this.radioButtonBottomRebar.UseVisualStyleBackColor = true;
-            // 
             // textBoxCurView
             // 
             this.textBoxCurView.Location = new System.Drawing.Point(107, 30);
@@ -79,28 +57,6 @@
             this.textBoxCurView.Size = new System.Drawing.Size(401, 20);
             this.textBoxCurView.TabIndex = 4;
             this.textBoxCurView.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // radioButtonBottomAdd
-            // 
-            this.radioButtonBottomAdd.AutoSize = true;
-            this.radioButtonBottomAdd.Location = new System.Drawing.Point(34, 170);
-            this.radioButtonBottomAdd.Name = "radioButtonBottomAdd";
-            this.radioButtonBottomAdd.Size = new System.Drawing.Size(138, 17);
-            this.radioButtonBottomAdd.TabIndex = 5;
-            this.radioButtonBottomAdd.TabStop = true;
-            this.radioButtonBottomAdd.Text = "Bottom additional rebars";
-            this.radioButtonBottomAdd.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonTopAdd
-            // 
-            this.radioButtonTopAdd.AutoSize = true;
-            this.radioButtonTopAdd.Location = new System.Drawing.Point(34, 147);
-            this.radioButtonTopAdd.Name = "radioButtonTopAdd";
-            this.radioButtonTopAdd.Size = new System.Drawing.Size(124, 17);
-            this.radioButtonTopAdd.TabIndex = 6;
-            this.radioButtonTopAdd.TabStop = true;
-            this.radioButtonTopAdd.Text = "Top additional rebars";
-            this.radioButtonTopAdd.UseVisualStyleBackColor = true;
             // 
             // Okbutton
             // 
@@ -129,19 +85,63 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Views to create:";
             // 
+            // topMainRebarview
+            // 
+            this.topMainRebarview.AutoSize = true;
+            this.topMainRebarview.Location = new System.Drawing.Point(34, 91);
+            this.topMainRebarview.Name = "topMainRebarview";
+            this.topMainRebarview.Size = new System.Drawing.Size(97, 17);
+            this.topMainRebarview.TabIndex = 10;
+            this.topMainRebarview.Text = "Top main rebar";
+            this.topMainRebarview.UseVisualStyleBackColor = true;
+            this.topMainRebarview.CheckedChanged += new System.EventHandler(this.topMainRebarview_CheckedChanged);
+            // 
+            // bottomMainRebarView
+            // 
+            this.bottomMainRebarView.AutoSize = true;
+            this.bottomMainRebarView.Location = new System.Drawing.Point(34, 113);
+            this.bottomMainRebarView.Name = "bottomMainRebarView";
+            this.bottomMainRebarView.Size = new System.Drawing.Size(111, 17);
+            this.bottomMainRebarView.TabIndex = 11;
+            this.bottomMainRebarView.Text = "Bottom main rebar";
+            this.bottomMainRebarView.UseVisualStyleBackColor = true;
+            this.bottomMainRebarView.CheckedChanged += new System.EventHandler(this.bottomMainRebarView_CheckedChanged);
+            // 
+            // topAdditionalRebarView
+            // 
+            this.topAdditionalRebarView.AutoSize = true;
+            this.topAdditionalRebarView.Location = new System.Drawing.Point(34, 136);
+            this.topAdditionalRebarView.Name = "topAdditionalRebarView";
+            this.topAdditionalRebarView.Size = new System.Drawing.Size(120, 17);
+            this.topAdditionalRebarView.TabIndex = 12;
+            this.topAdditionalRebarView.Text = "Top additional rebar";
+            this.topAdditionalRebarView.UseVisualStyleBackColor = true;
+            this.topAdditionalRebarView.CheckedChanged += new System.EventHandler(this.topAdditionalRebarView_CheckedChanged);
+            // 
+            // bottomAdditionalRebarView
+            // 
+            this.bottomAdditionalRebarView.AutoSize = true;
+            this.bottomAdditionalRebarView.Location = new System.Drawing.Point(34, 159);
+            this.bottomAdditionalRebarView.Name = "bottomAdditionalRebarView";
+            this.bottomAdditionalRebarView.Size = new System.Drawing.Size(134, 17);
+            this.bottomAdditionalRebarView.TabIndex = 13;
+            this.bottomAdditionalRebarView.Text = "Bottom additional rebar";
+            this.bottomAdditionalRebarView.UseVisualStyleBackColor = true;
+            this.bottomAdditionalRebarView.CheckedChanged += new System.EventHandler(this.bottomAdditionalRebarView_CheckedChanged);
+            // 
             // DublicateViewsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(527, 228);
+            this.Controls.Add(this.bottomAdditionalRebarView);
+            this.Controls.Add(this.topAdditionalRebarView);
+            this.Controls.Add(this.bottomMainRebarView);
+            this.Controls.Add(this.topMainRebarview);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cancelbutton);
             this.Controls.Add(this.Okbutton);
-            this.Controls.Add(this.radioButtonTopAdd);
-            this.Controls.Add(this.radioButtonBottomAdd);
             this.Controls.Add(this.textBoxCurView);
-            this.Controls.Add(this.radioButtonBottomRebar);
-            this.Controls.Add(this.radioButtonTopRebar);
             this.Controls.Add(this.label1);
             this.Name = "DublicateViewsForm";
             this.Text = "DublicateViewsForm";
@@ -153,13 +153,13 @@
         #endregion
        
          private System.Windows.Forms.Label label1;
-         private System.Windows.Forms.RadioButton radioButtonTopRebar;
-         private System.Windows.Forms.RadioButton radioButtonBottomRebar;
          private System.Windows.Forms.TextBox textBoxCurView;
-         private System.Windows.Forms.RadioButton radioButtonBottomAdd;
-         private System.Windows.Forms.RadioButton radioButtonTopAdd;
          private System.Windows.Forms.Button Okbutton;
          private System.Windows.Forms.Button cancelbutton;
          private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox topMainRebarview;
+        private System.Windows.Forms.CheckBox bottomMainRebarView;
+        private System.Windows.Forms.CheckBox topAdditionalRebarView;
+        private System.Windows.Forms.CheckBox bottomAdditionalRebarView;
     }
 }

@@ -13,7 +13,11 @@ namespace Reinforcement.DublicateView
 {
     public partial class DublicateViewsForm : Form
     {
-        private DublicateViews m_instance;
+
+        private DublicateViews m_dataBuffer;
+
+        //private DublicateViews m_instance;
+        /*
         private System.ComponentModel.Container m_components = null;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button okButton;
@@ -24,7 +28,7 @@ namespace Reinforcement.DublicateView
         private System.Windows.Forms.Label viewLabel;
         public System.Windows.Forms.TextBox viewTextBox;
         private bool m_isReset;
-
+        
         public bool IsReset
         {
             get
@@ -35,29 +39,43 @@ namespace Reinforcement.DublicateView
             {
                 m_isReset = value;
             }
-        }
+        }*/
         
-        public DublicateViewsForm(DublicateViews Inst)
+        public DublicateViewsForm(DublicateViews dataBuffer)
         {
-          m_isReset = false;
-          m_instance = Inst;
-          if (null == m_instance)
-            {
-                TaskDialog.Show("Revit", "Load Application Failed");
-            }
+
             InitializeComponent();
+            m_dataBuffer = dataBuffer;
+            
         }
+
+
+        private void DublicateViewsForm_Load(object sender, EventArgs e)
+        {
+           // wallTypeComboBox.DataSource = m_dataBuffer.WallTypes;
+           // wallTypeComboBox.DisplayMember = "Name";
+
+           // structualCheckBox.Checked = m_dataBuffer.IsSturctual;
+        }
+
 
         private void okButton_Click(object sender, System.EventArgs e)
         {
-            if (IsReset)
+            try
             {
-                m_instance.CreateCopies();
-
+                if (this.topMainRebarview.Checked)
+                {
+                   // m_dataBuffer.CreateDublicate(); 
+                }
+                
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-
+            catch(Exception ex)
+            {
+                TaskDialog.Show("Revit", ex.Message);
+            }
+       
         }
         
         private void cancelButton_Click(object sender, EventArgs e)
@@ -66,6 +84,26 @@ namespace Reinforcement.DublicateView
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void topMainRebarview_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bottomMainRebarView_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void topAdditionalRebarView_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bottomAdditionalRebarView_CheckedChanged(object sender, EventArgs e)
         {
 
         }

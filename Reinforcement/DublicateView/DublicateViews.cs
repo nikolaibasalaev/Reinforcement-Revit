@@ -24,12 +24,17 @@ namespace Reinforcement.DublicateView
     [Autodesk.Revit.Attributes.Journaling(Autodesk.Revit.Attributes.JournalingMode.NoCommandData)]
     public class DublicateViews : IExternalCommand
     {
+        // Private Members
         Autodesk.Revit.UI.UIApplication m_revit = null;    // application of Revit
         bool m_topRebarView;
         bool m_bottomRebarView;
         bool m_topAddRebarView;
         bool m_bottomAddRebarView;
         string m_currentViewName;
+        ParameterFilterElement f_topRebarView = null;
+        ParameterFilterElement f_bottomRebarView = null;
+        ParameterFilterElement f_topAddRebarView = null;
+        ParameterFilterElement f_bottomAddRebarView = null;
 
         public bool topRebarView
         {
@@ -92,65 +97,112 @@ namespace Reinforcement.DublicateView
         }
 
         public DublicateViews()
-        { }
-
+        {
+            topRebarView = true;
+            bottomRebarView = true;
+            topAddRebarView = true;
+            bottomAddRebarView = true;
+        }
+        #region IExternalCommand Members Implementation
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
+
+            Autodesk.Revit.UI.UIApplication revit = commandData.Application;
+            UIDocument project = revit.ActiveUIDocument;
+
+            // Application app = uiapp.Application;
+            Document doc = project.Document;
+
+            // Show the dialog for the user select the wall style
+            using (DublicateViewsForm displayForm = new DublicateViewsForm(this))
             {
-                Autodesk.Revit.UI.UIApplication revit = commandData.Application;
-                m_revit = revit;
-                DublicateViewsForm displayForm = new DublicateViewsForm(this);
-                displayForm.StartPosition = FormStartPosition.CenterParent;
-
-
+                if (DialogResult.OK != displayForm.ShowDialog())
+                {
+                    return Autodesk.Revit.UI.Result.Failed;
+                }
             }
 
-
-
-
-            //#endregion IExternalCommand Members Implementation
+            // If everything goes right, return succeeded.
+            return Autodesk.Revit.UI.Result.Succeeded;
         }
-        public class ViewDubl
+
+        #endregion IExternalCommand Members Implementation
+
+        Boolean CreateCopy(Autodesk.Revit.UI.UIDocument project, ParameterFilterElement filter) //select filters (or create them)
         {
-            private string m_curViewName;
+            //search filters
+            //ParameterFilterElement filter = null;
+           // FilteredElementCollector coll = new FilteredElementCollector(project.Document).OfClass(typeof(ParameterFilterElement));
+           // string topRebarFilter = "Rebar Layer Top";
+           // string bottomRebarFilter = "Rebar Layer Bottom";
 
+            return true;
+        }
 
-            public string curViewName
+        Boolean CreateFilters(Autodesk.Revit.UI.UIDocument project) //select filters (or create them)
+        {
+           // FilteredElementCollector coll = new FilteredElementCollector(project.Document).OfClass(typeof(ParameterFilterElement));
+            string topRebarFilter = "Rebar Layer Top";
+            string bottomRebarFilter = "Rebar Layer Bottom";
+            string topAddRebarFilter = "Rebar Layer Top Add";
+            string bottomAddRebarFilter = "Rebar Layer Bottom Add";
+
+            /*
+             ParameterFilterElement f_topRebarView = null;
+        ParameterFilterElement f_bottomRebarView = null;
+        ParameterFilterElement f_topAddRebarView = null;
+        ParameterFilterElement f_bottomAddRebarView = null;
+             * */
+            IEnumerable<Element> filters = new FilteredElementCollector(project.Document).OfClass(typeof(ParameterFilterElement)).ToElements();
+            //List<ElementId> categories = new List<ElementId>();
+            //categories.Add(new ElementId(BuiltInCategory.OST_Rebar));
+           // List<FilterRule> filterRules = new List<FilterRule>();
+            foreach (Element element in filters)
             {
-                get
+                if (element.Name.Equals(topRebarFilter))
                 {
-                    return m_curViewName;
+                    f_topRebarView = element as ParameterFilterElement;
                 }
-                set
+                else { }//create new filter
+                if (element.Name.Equals(bottomRebarFilter))
                 {
-                    m_curViewName = value;
+                    f_bottomRebarView = element as ParameterFilterElement;
+                }
+                else { }//create new filter
+                if (element.Name.Equals(topAddRebarFilter))
+                {
+                    f_topAddRebarView = element as ParameterFilterElement;
+                }
+                else { }//create new filter
+                if (element.Name.Equals(bottomAddRebarFilter))
+                {
+                    f_bottomAddRebarView = element as ParameterFilterElement;
                 }
             }
 
-            public ViewDubl(Document doc)
-            {
-                //GetAllViews(doc);
-                // GetTitleBlocks(doc);
-            }
+            return true;
+        }
 
-            public void DublicateView(Document doc)
+            public void CreateDublicate(Document doc, string filtername)
             {
                 Autodesk.Revit.DB.View viewcur = doc.ActiveView;
-                if (null == doc)
-                {
-                    throw new ArgumentNullException("doc");
-                }
 
-                if (null == viewcur)
-                {
-                    throw new InvalidOperationException("No view be selected, generate sheet be canceled.");
-                }
-               // ViewSheet sheet = ViewSheet.Create(doc, m_titleBlock.Id);
-               // sheet.Name = SheetName;
-               // PlaceView(viewcur, sheet);
+                Transaction t = new Transaction(doc);
+                t.Start("Create new dublicate");
+
+
+
+                t.Commit();
+
             }
 
-        }
+        
+    }
+}
+
+
+
+
 
 
         /*
@@ -220,5 +272,5 @@ namespace Reinforcement.DublicateView
                 return Result.Succeeded;
             }
         }*/
-    }
-}
+    
+
